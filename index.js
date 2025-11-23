@@ -9,8 +9,9 @@ const productRoutes = new ProductRoutes()
 server.start()
 
 server.addRoute('/api', productRoutes.init())
+//server.addRoute('/login', loginRoutes.inti())
 
 }
 
-main().catch(error => {console.log("1", error)});
+main().catch(error => {error});
 

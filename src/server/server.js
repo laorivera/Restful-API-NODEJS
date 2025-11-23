@@ -1,22 +1,25 @@
 import express from 'express';
+import cors from 'cors';
 
 export class Server {
-    #APP = express();
-    #PORT = 3333;
+    #app = express();
+    #port = 3333;
 
     constructor() {
         this.jsonParse();
+        this.cors();
     }
 
-    jsonParse = () => this.#APP.use(express.json());
+    cors = () => this.#app.use(cors())
+    jsonParse = () => this.#app.use(express.json());
    
     addRoute(path, router) {
-        this.#APP.use(path, router);
+        this.#app.use(path, router);
     }
 
     start() {
-        this.#APP.listen(this.#PORT, () => {
-            console.log('Server running on port', this.#PORT);
+        this.#app.listen(this.#port, () => {
+            console.log('Server running on port', this.#port);
         });
     }
 }

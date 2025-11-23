@@ -1,38 +1,55 @@
 export class ProductModels {
+
+    constructor(){};
     
-    product = {
-        id: 0, 
-        title: "",
-        price: 0,
-        description: "",
-        image:  "",
+    product = { 
+        id:   String,
+        title:  String,
+        price: Number,
+        description: String,
+        image:  String,
         };
     
-    
-    constructor(){};
+    products = []; // store product array
 
-    products = [
-        {id: this.product},
-    ];
+    generateId(){const id = Math.random(); return id}
 
-    getProduct(){return this.product};
+    getProducts(){return this.products};
 
-    setProduct(newitem) {
-    const createitem = this.product = {
-        id: newitem.id,
-        name: newitem.name, // ///
-        price: newitem.price,
-        description: newitem.description,
-        price: newitem.price,
-        image: newitem.image,
-        
-    }; 
-    return createitem; }
-
-    delProduct(delitem){
-        if(delitem === this.product.id ){this.setProduct(delitem); console.log(this.product.id, 'deleted')}
-        else{console.log("item not found")}
+    setProduct(item) {
+        const createitem = {
+            id: item.id,
+            name: item.name, 
+            price: item.price,
+            description: item.description,
+            price: item.price,
+            image: item.image,
+        }; 
+        this.products.push(createitem)
     }
 
-    //getPayload(){return this.product};
+     delProductByIndex(index) {
+      const newProducts = [];
+        for (let i = 0; i < this.products.length; i++) {
+            if (i !== index) {
+                newProducts.push(this.products[i]);
+            }
+        }
+      this.products = newProducts;
+    }
+
+    putProduct(item){
+     const list = this.products
+     for(let i = 0; i < list.length; i++){
+        if (item.id === list[i].id) 
+            {list[i] = {
+                id: item.id,
+                name: item.name, 
+                price: item.price,
+                description: item.description,
+                image: item.image
+                }
+            }
+        }
+    }  
 }
