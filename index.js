@@ -1,17 +1,20 @@
-import { ProductRoutes } from './src/routes/productRoutes.js';
+import { ProductRoutes } from './src/routes/product_routes.js';
 import { Server } from './src/server/server.js';
 
 async function main(){
 
-const server = new Server(); 
-const productRoutes = new ProductRoutes()
+  const server = new Server(); 
+  const productRoutes = new ProductRoutes()
 
-server.start()
+  server.start()
 
-server.addRoute('/api', productRoutes.init())
-//server.addRoute('/login', loginRoutes.inti())
-
+  server.addRoute('/api', productRoutes.init())
+  //server.addRoute('/login', loginRoutes.inti())
+  
 }
 
-main().catch(error => {error});
+main().catch(error => {
+  console.log('Server error:', error.message);
+  console.log(error.stack);
+});
 
