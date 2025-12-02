@@ -6,20 +6,29 @@ export class ProductServices {
 
   constructor(){}
 
-  async getProducts(){
-    const allitems = await this.productModels.getProductsAll();
-    return allitems
+  async getProduct(){
+    const allitems = await this.productModels.getProductAll();
+    return allitems;
   }
 
-  async postProducts(){
-  
+  async getProductbyId(id){
+    const itembyid = await this.productModels.getProductByID(id);
+    return itembyid;
   }
+
+ async postProduct(newItem) {
+    // Business logic validation
+    if(newItem.price <= 0) {
+        return console.log('precio debe ser positivo')
+    }else {return await this.productModels.setProduct(newItem);}
+    
+}
 
   async delProducts(){
-
+    
   }
 
   async putProducst(){
-    
+
   }
 }

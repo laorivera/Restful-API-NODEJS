@@ -4,31 +4,40 @@ import { ProductModels } from "../models/product_models.js"
 
 export class ProductController {
 
-    productServices = new ProductServices()
-    productModels = new ProductModels()
+    productServices = new ProductServices
+    productModels = new ProductModels
     
     constructor(){};
     
     getProducts = async (req, res) => {
+      const { id } = req.query
       try{
-      const response = await this.productServices.getProducts();
-      res.json(response)
-      }catch(error){res.status(500).json("server error")}
+        if(id){ const response = await this.productServices.getProductbyId(id);
+            console.log('item ID: ', id)
+            return res.json(response)
+        }
+        else{ const response = await this.productServices.getProduct();
+           console.log('id no encontrado')
+           return res.status(201).json(response)
+        }
+      }catch(error){return res.status(500).json("error controller getproducts")}
     }
     
-    postProducts = (req, res) => {
+    postProducts = async (req, res) => {
         const newItem = req.body;
-        const list = this.productModels.getProductsAll();
-        for (let i =0; i < list.length; i++){
-            if(req.body.id !== this.productModels.products[i].id){
-                 this.productModels.setProduct(newItem)
-                 console.log(this.productModels.getProductsAll())
-                 return res.status(201).json(newItem)
-            }
+        console.log(newItem)
+     try{
+        if(!newItem.name || !newItem.price || !newItem.sku) {
+            return res.status(400).json("missing name, price or sku")
         }
-        //console.log(this.productModels.getProduct());
-        return res.status(404).json('id producto ya existe')
+        else {
+        const response = await this.productServices.postProduct(newItem);
+            return res.status(201).json(response)
+        }
+      } catch(error) {return res.status(500).json("Error creating product")
     }
+}
+
 
     delProducts = (req, res) => {
         const delitemID = req.body.id;
