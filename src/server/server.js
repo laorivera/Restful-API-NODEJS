@@ -1,8 +1,9 @@
 import express from 'express';
-import cors from 'cors';
 
 export class Server {
+
     #app = express();
+
     #port = 3333;
 
     constructor() {
@@ -10,7 +11,6 @@ export class Server {
         this.cors();
     }
 
-    cors = () => this.#app.use(cors())
     jsonParse = () => this.#app.use(express.json());
    
     addRoute(path, router) {
