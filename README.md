@@ -1,93 +1,89 @@
-# API Sistema de inventario NODEJS
-
 Product API
 
-REST API for product management with Firebase Firestore.
-🚀 Quick Start
+API REST para gestión de productos con Firebase Firestore.
+🚀 Inicio Rápido
 bash
 
 npm install
 node index.js
-# Server runs on http://localhost:3333
+# Servidor corre en http://localhost:3333
 
-📁 Project Structure
+📁 Estructura del Proyecto
 text
 
-src/ 
+src/
+index.js
 
-  index.js
-  
-  ├── server/       # Express config
-    
-  ├── controllers/  # Route handlers
-  
-  ├── models/       # Firebase operations
-    
-  ├── services/     # Business logic
-   
-  └── routes/       # API endpoints
+├── server/       # Configuración de Express
 
-📡 API Endpoints
+├── controllers/  # Manejadores de rutas
+
+├── models/       # Operaciones de Firebase
+
+├── services/     # Lógica de negocio
+
+└── routes/       # Endpoints de API
+
+📡 Endpoints 
+
+Obtener todos los productos
 
 GET /api/product
 
-Get all products
+    Respuesta: [{id, nombre, precio, descripción, sku, stock, categoría}]
 
-    Response:  [{id, name, price, description, sku, stock, category}]
+Obtener producto por ID
 
-GET  /api/product/:id
+GET /api/product/:id
 
-Get product by ID
+Crear producto
+
 POST /api/product
-
-Create product
 
     Body: {
 
-        "name": "string",
-  
-        "price": "number",
-  
-        "description": "string",
-  
-        "sku": "string",
-  
-        "stock": "number",
-  
-        "category": "string"
-  
+      "name": "string",
+
+      "price": "number",
+
+      "description": "string",
+
+      "sku": "string",
+
+      "stock": "number",
+
+      "category": "string"
+
     }
+    
+Actualizar producto
 
 PUT /api/product
 
-Update product
-
     Body: {
-    
-      "id": "string",        // Required - Document ID
-      "name": "string",
-      "price": "number",
-      ...all other fields
+
+      "id": "string",        // Requerido - Document ID
       
+      "name": "string",
+      
+      ...all other fields
+  
     }
+
+Eliminar producto
 
 DELETE /api/product
 
-Delete product
+    Body: {"id": "string"}
 
-    
-      Body: {  
-      
-        "id": "string"  
-        
-        }
-    
+⚙️ Configuración
 
-⚙️ Setup
-    Add Firebase config to src/server/firebase.js
-    Start server: node index.js
-    API base: http://localhost:3333/api
+    Iniciar servidor: node index.js
 
-🔧 Tech Stack
+    Base de API: http://localhost:3333/api
+
+🔧 Tecnologías
+
     Node.js + Express
+
     Firebase Firestore
