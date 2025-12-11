@@ -18,7 +18,7 @@ export class ProductController {
         }
         else{ const response = await this.productServices.getProduct();
            console.log('id no encontrado')
-           return res.status(201).json(response)
+           return res.status(201).json("all items: ", response)
         }
       }catch(error){return res.status(500).json("error controller getproducts")}
     }
@@ -32,33 +32,42 @@ export class ProductController {
         }
         else {
         const response = await this.productServices.postProduct(newItem);
-            return res.status(201).json(response)
+            return res.status(201).json("item created: ", response)
         }
       } catch(error) {return res.status(500).json("Error creating product")
     }
 }
 
 
-    delProducts = (req, res) => {
+    delProducts = async (req, res) => {
         const delitemID = req.body.id;
-        const list = this.productModels.getProductsAll();
-        for(let i = 0; i < list.length; i++){
-            if (delitemID === list[i].id){ this.productModels.delProductByIndex(i);
-                 
-                return res.status(201).json("item id eliminado", delitemID)
-                
+        console.log(delitemID)
+        //const list = this.productModels.getProductsAll();
+        try{
+            if(!delitemID){
+                return res.status(400).json("missing ID")
             }
-        }
-        return res.status(404).json("item no existe")
+            else {
+                const response = await this.productServices.delProducts(delitemID);
+                return res.status(201).json("item deleteda: ", response)
+            }
+        }catch(error){return res.status(500).json("error deleting")}
     }
     
-    putProducts = (req, res) => {
-        const itemID = req.body.id 
-        const list = this.productModels.getProductsAll();
-        for(let i = 0; i < list.length; i++){
-            if (itemID === list[i].id){ this.productModels.putProductByIndex(i); return res.status(201).json("item id eliminado", delitemID)}
-        }
+    putProducts = async (req, res) => {
+        const newItem = req.body;
+        console.log(newItem.id);
+        try{ 
+            if(newItem.id === null || newItem.id === ""){
+                return res.status(400).json("bad request")
+            }
+            else {
+                const response = await this.productServices.putProducts(newItem)
+                console.log(newItem)
+                return res.status(201).json("item modificado:", response)
+            }
+
+        }catch(error){return res.status(500).json("error upddating")}
+
     }
-
-
 }

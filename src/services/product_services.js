@@ -24,11 +24,21 @@ export class ProductServices {
     
 }
 
-  async delProducts(){
-    
+  async delProducts(id){
+    if(id <= 0){
+      return console.log('id invalido')
+    }else{return await this.productModels.delProductByIndex(id)}
   }
 
-  async putProducst(){
+  async putProducts(newItem){
+    if(!newItem){
+      console.log('invalid')
+      return null 
+
+    }else{
+      console.log('ok nigg'); 
+      return await this.productModels.putProductByindex(newItem)
+    }
 
   }
 }

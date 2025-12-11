@@ -1,6 +1,9 @@
 import express from 'express';
+import {Cors} from './cors.js'
 
 export class Server {
+
+    #cors = new Cors(); 
 
     #app = express();
 
@@ -8,9 +11,11 @@ export class Server {
 
     constructor() {
         this.jsonParse();
-        this.cors();
+        this.initcors();
     }
 
+
+    initcors = () => this.#app.use(this.#cors.cors());
     jsonParse = () => this.#app.use(express.json());
    
     addRoute(path, router) {

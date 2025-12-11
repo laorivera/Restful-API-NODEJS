@@ -3,23 +3,23 @@ import 'dotenv/config';
 
 export class Cors {
 
-    cors = cors();
+    constructor(){ console.log('Cors class instantiated');  };
 
-    constructor(){ }
-
-    #allowedOrigins = {
-      origin:   process.env.ALLOWED_ORIGINS
-    }
+    #allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',') || [];
 
     corsOption ={
       origin:  this.#allowedOrigins,
       methods: ['GET', 'POST', 'PUT', 'DELETE'],
       allowedHeaders: ['Content-Type', 'Authorization'],
       credentials: false,
-    }
+    };
     
-    isCorsvalid(origin){
-
+    cors = () => {
+     const allowed = this.#allowedOrigins
+     console.log('Cors options:', this.corsOption)
+     console.log('Cors allowed:', allowed)
+     return cors(this.corsOption)
+    
     }
 
 }

@@ -1,6 +1,5 @@
-import jwt from 'jsonwebtoken';
+import jwt  from 'jsonwebtoken';
 import 'dotenv/config';
-
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -19,4 +18,5 @@ export const authenticateToken = (req, res, next) => {
     req.user = user;
     next();
   });
+
 };

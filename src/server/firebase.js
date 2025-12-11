@@ -15,10 +15,12 @@ export class Firebase {
     appId: process.env.FIREBASE_APP_ID
   };
 
-constructor(){}
+  constructor(){}
 
-app = initializeApp(this.firebaseConfig);
+  app = initializeApp(this.firebaseConfig);
 
-db = getFirestore(this.app);
+  db = getFirestore(this.app);
 
+
+  
 }

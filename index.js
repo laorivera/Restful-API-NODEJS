@@ -4,12 +4,14 @@
   async function main(){
 
     const server = new Server(); 
-    const productRoutes = new ProductRoutes()
+    
+    const productRoutes = new ProductRoutes();
 
-    server.start()
+    server.addRoute('/api', productRoutes.init());
 
-    server.addRoute('/api', productRoutes.init())
-    server.addRoute('/login', loginRoutes.inti())
+    //server.addRoute('/login', loginRoutes.inti());
+
+    server.start();
     
   }
 
