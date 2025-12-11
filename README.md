@@ -13,56 +13,75 @@ node index.js
 📁 Project Structure
 text
 
-src/
-├── server/       # Express config
-├── controllers/  # Route handlers
-├── models/       # Firebase operations
-├── services/     # Business logic
-└── routes/       # API endpoints
+src/ 
+
+  index.js
+  
+  ├── server/       # Express config
+    
+  ├── controllers/  # Route handlers
+  
+  ├── models/       # Firebase operations
+    
+  ├── services/     # Business logic
+   
+  └── routes/       # API endpoints
 
 📡 API Endpoints
+
 GET /api/product
 
 Get all products
-json
 
-Response: [{id, name, price, description, sku, stock, category}]
+    Response:  [{id, name, price, description, sku, stock, category}]
 
-GET /api/product/:id
+GET  /api/product/:id
 
 Get product by ID
 POST /api/product
 
 Create product
-json
 
-Body: {
-  "name": "string",      // Required
-  "price": "number",     // Required
-  "description": "string",
-  "sku": "string",       // Required
-  "stock": "number",
-  "category": "string"
-}
+    Body: {
+
+        "name": "string",
+  
+        "price": "number",
+  
+        "description": "string",
+  
+        "sku": "string",
+  
+        "stock": "number",
+  
+        "category": "string"
+  
+    }
 
 PUT /api/product
 
 Update product
-json
 
-Body: {
-  "id": "string",        // Required - Document ID
-  "name": "string",
-  "price": "number",
-  ...all other fields
-}
+    Body: {
+    
+      "id": "string",        // Required - Document ID
+      "name": "string",
+      "price": "number",
+      ...all other fields
+      
+    }
 
 DELETE /api/product
 
 Delete product
-json
 
-Body: {"id": "string"}
+    
+      Body: {  
+      
+        "id": "string"  
+        
+        }
+    
 
 ⚙️ Setup
     Add Firebase config to src/server/firebase.js
