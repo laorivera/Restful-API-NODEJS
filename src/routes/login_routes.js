@@ -1,18 +1,24 @@
 import { Router } from 'express';
-import 'dotenv/config';
-//import { LoginContoller } from '../controllers/login_controller.js';
+import { LoginController } from '../controllers/login_controller.js';
+import { JwtToken } from '../middlewares/auth_middlewares.js';
 
 export class LoginRoutes {
 
-  constructor(){}
-
   #router = Router();
 
-  #JWT_SECRET = process.env.JWT_SECRET;
+  #auth = new JwtToken();
 
-  init(){
-      this.#router.get('/', this.loginController.getProducts)
-      this.#router.get('/user', this.loginController.getProducts )
-    }
+  #loginController = new LoginController();
 
+  
+  init() {
+
+    this.#router.post('/login', this.#loginController.loginUser);
+    
+    this.#router.get('/user', this.#auth.authenticateToken, this.#loginController.loginValid)
+
+    return this.#router;
+
+  }
+  
 }

@@ -3,20 +3,33 @@ import 'dotenv/config';
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
-export const authenticateToken = (req, res, next) => {
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1]; // Bearer TOKEN
+export class JwtToken{
 
-  if (!token) {
-    return res.status(401).json({ error: 'Access token required' });
-  }
+  authenticateToken = (req, res, next) => {
+  
+    const authHeader = req.headers['authorization'];
 
-  jwt.verify(token, JWT_SECRET, (err, user) => {
-    if (err) {
-      return res.status(403).json({ error: 'Invalid or expired token' });
+    const token = authHeader && authHeader.split(' ')[1]; // Bearer TOKEN
+
+    if (!token) {
+      return res.status(401).json({ error: 'Access token required' });
     }
-    req.user = user;
-    next();
-  });
+    else {
+      jwt.verify(token, JWT_SECRET, (err, user) => {
+        if (err){
+          switch (err.name){
+            case 'TokenExpiredError':
+              return res.status(401).json({error: "token expirado"})
+            default: 
+              return res.status(403).json({error: "token invalido"})
+            }
+        }
+        console.log('test jwt')
+        req.user = user;
+        next();
+      });
+    }
 
-};
+  };
+
+}

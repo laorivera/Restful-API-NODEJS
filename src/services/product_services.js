@@ -4,8 +4,6 @@ export class ProductServices {
 
   productModels = new ProductModels()
 
-  constructor(){}
-
   async getProduct(){
     const allitems = await this.productModels.getProductAll();
     return allitems;
@@ -36,7 +34,7 @@ export class ProductServices {
       return null 
 
     }else{
-      console.log('ok nigg'); 
+      console.log('ok'); 
       return await this.productModels.putProductByindex(newItem)
     }
 

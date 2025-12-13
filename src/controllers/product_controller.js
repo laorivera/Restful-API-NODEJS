@@ -7,10 +7,10 @@ export class ProductController {
     productServices = new ProductServices
     productModels = new ProductModels
     
-    constructor(){};
     
     getProducts = async (req, res) => {
-      const { id } = req.query
+      const { id } = req.params
+      console.log(id)
       try{
         if(id){ const response = await this.productServices.getProductbyId(id);
             console.log('item ID: ', id)
@@ -18,7 +18,7 @@ export class ProductController {
         }
         else{ const response = await this.productServices.getProduct();
            console.log('id no encontrado')
-           return res.status(201).json("all items: ", response)
+           return res.status(201).json(response)
         }
       }catch(error){return res.status(500).json("error controller getproducts")}
     }
@@ -32,24 +32,22 @@ export class ProductController {
         }
         else {
         const response = await this.productServices.postProduct(newItem);
-            return res.status(201).json("item created: ", response)
+            return res.status(201).json(response)
         }
-      } catch(error) {return res.status(500).json("Error creating product")
+        }catch(error) {return res.status(500).json("Error creating product")}
     }
-}
-
 
     delProducts = async (req, res) => {
-        const delitemID = req.body.id;
-        console.log(delitemID)
+        const { id } = req.params;
+        console.log(id)
         //const list = this.productModels.getProductsAll();
         try{
-            if(!delitemID){
+            if(!id){
                 return res.status(400).json("missing ID")
             }
             else {
-                const response = await this.productServices.delProducts(delitemID);
-                return res.status(201).json("item deleteda: ", response)
+                const response = await this.productServices.delProducts(id);
+                return res.status(201).json(response)
             }
         }catch(error){return res.status(500).json("error deleting")}
     }
@@ -64,7 +62,7 @@ export class ProductController {
             else {
                 const response = await this.productServices.putProducts(newItem)
                 console.log(newItem)
-                return res.status(201).json("item modificado:", response)
+                return res.status(201).json(response)
             }
 
         }catch(error){return res.status(500).json("error upddating")}

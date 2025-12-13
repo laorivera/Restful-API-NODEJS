@@ -4,13 +4,9 @@ import { collection, getDoc, getDocs, addDoc, deleteDoc, doc, updateDoc } from '
 
 export class ProductModels {
 
-    constructor(){};
-
     firebase = new Firebase;
     
     productsCollection = collection(this.firebase.db, 'products');
-
-    products = []; // store product array
 
     async getProductAll(){
         const dbcollection = await getDocs(this.productsCollection);

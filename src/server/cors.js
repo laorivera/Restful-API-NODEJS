@@ -3,8 +3,6 @@ import 'dotenv/config';
 
 export class Cors {
 
-    constructor(){ console.log('Cors class instantiated');  };
-
     #allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',') || [];
 
     corsOption ={

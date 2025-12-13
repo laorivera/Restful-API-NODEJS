@@ -1,4 +1,5 @@
   import { ProductRoutes } from './src/routes/product_routes.js';
+  import { LoginRoutes } from './src/routes/login_routes.js';  // Add this
   import { Server } from './src/server/server.js';
 
   async function main(){
@@ -6,10 +7,11 @@
     const server = new Server(); 
     
     const productRoutes = new ProductRoutes();
+    const loginRoutes = new LoginRoutes();
 
     server.addRoute('/api', productRoutes.init());
 
-    //server.addRoute('/login', loginRoutes.inti());
+    server.addRoute('/auth', loginRoutes.init()); 
 
     server.start();
     

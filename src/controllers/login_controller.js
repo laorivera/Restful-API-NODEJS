@@ -1,16 +1,27 @@
-import { ProductModels } from "../models/product_models";
+import { LoginService } from '../services/login_services.js';
 
-export class LoginContoller {
+export class LoginController {
+  
+  #loginService = new LoginService();
+  
+ loginUser = async (req, res) => {
+  try {
 
-  login = (req, res) => {
+    const { username } = req.body;
+    const { password } = req.body;
+    
+    const result = await this.#loginService.authenticate(username, password);
 
-    const { username, password } = req.body;
+    return res.json({ token: result.token });
 
-    if (!username || !password) {
-      return res.status(400).json({ error: 'Username and password required' });
-    }
-    else{
-      
-    }
+  } catch (error) {
+    return res.status(500).json({ error: 'Login failed' });
+  }
+};
+
+  loginValid = async (req, res) => {
+    try{
+
+    }catch(error){}
   }
 }
