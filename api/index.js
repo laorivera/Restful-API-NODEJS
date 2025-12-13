@@ -25,12 +25,11 @@ const appPromise = main().catch(error => {
 export default appPromise;
 
 
-
 if (process.env.VERCEL !== '1') {
     appPromise.then(app => {
         const PORT = process.env.PORT || 3333;
         app.listen(PORT, () => {
-            console.log(`Local server running on port ${PORT}`);
+            console.log(`Local server running on port  ${PORT}`);
         });
     });
 }
