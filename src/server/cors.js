@@ -12,7 +12,7 @@ export class Cors {
       credentials: false,
     };
     
-    cors = () => {
+    corsinit = () => {
      const allowed = this.#allowedOrigins
      console.log('Cors options:', this.corsOption)
      console.log('Cors allowed:', allowed)

@@ -1,8 +1,8 @@
-  import { ProductRoutes } from './src/routes/product_routes.js';
-  import { LoginRoutes } from './src/routes/login_routes.js';  // Add this
-  import { Server } from './src/server/server.js';
+import { ProductRoutes } from './src/routes/product_routes.js';
+import { LoginRoutes } from './src/routes/login_routes.js';  // Add this
+import { Server } from './src/server/server.js';
 
-  async function main(){
+async function main(){
 
     const server = new Server(); 
     
@@ -13,14 +13,26 @@
 
     server.addRoute('/auth', loginRoutes.init()); 
 
-    //server.start();
-
-    return server.getApp();
     
-  }
+    return server.getApp();
+}
 
-  export default main().catch(error => {
+
+const appPromise = main().catch(error => {
     console.log('Server error:', error.message);
     throw error;
-  });
+});
 
+
+export default appPromise;
+
+/*
+
+if (process.env.VERCEL !== '1') {
+    appPromise.then(app => {
+        const PORT = process.env.PORT || 3333;
+        app.listen(PORT, () => {
+            console.log(`Local server running on port ${PORT}`);
+        });
+    });
+}*/

@@ -15,15 +15,15 @@ export class Server {
     }
 
 
-    initcors = () => this.#app.use(this.#cors.cors());
+    initcors = () => this.#app.use(this.#cors.corsinit());
     jsonParse = () => this.#app.use(express.json());
    
     addRoute(path, router) {
         this.#app.use(path, router);
     }
 
-    getApp() {
-        return this.#app;
+     getApp() {
+        return this.#app;  // ✅ This returns the Express app
     }
 
     start() {
