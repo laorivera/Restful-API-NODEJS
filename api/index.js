@@ -1,7 +1,7 @@
 
-import { ProductRoutes } from './src/routes/product_routes.js';
-import { LoginRoutes } from './src/routes/login_routes.js'; 
-import { Server } from './src/server/server.js';
+import { ProductRoutes } from '../src/routes/product_routes.js';
+import { LoginRoutes } from '../src/routes/login_routes.js'; 
+import { Server } from '../src/server/server.js';
 
 async function main(){
 

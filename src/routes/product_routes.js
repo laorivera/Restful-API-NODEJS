@@ -5,7 +5,7 @@ export class ProductRoutes {
 
   #router = Router();
 
-  #productController = new ProductController;
+  #productController = new ProductController();
 
   init() {
       

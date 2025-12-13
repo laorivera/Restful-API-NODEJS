@@ -23,7 +23,7 @@ export class Server {
     }
 
      getApp() {
-        return this.#app;  
+        return this.#app;
     }
 
     start() {
