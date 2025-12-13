@@ -1,60 +1,20 @@
-//import { ProductRoutes } from './src/routes/product_routes.js';
-//import { LoginRoutes } from './src/routes/login_routes.js';  // Add this
-//import { Server } from './src/server/server.js';
+import { ProductRoutes } from './src/routes/product_routes.js';
+import { LoginRoutes } from './src/routes/login_routes.js';  // Add this
+import { Server } from './src/server/server.js';
 
-import express from 'express';
+async function main(){
 
-// Create a basic app as fallback
-const testApp = express();
-testApp.get('/', (req, res) => {
-    res.json({ status: 'API is alive', error: null });
-});
+    const server = new Server(); 
+    
+    const productRoutes = new ProductRoutes();
+    const loginRoutes = new LoginRoutes();
 
-// Try to load your real app, fallback to test app
-async function getApp() {
-    try {
-        const realApp = await main();
-        // Add a health check to real app
-        realApp.get('/health', (req, res) => {
-            res.json({ status: 'healthy', app: 'real' });
-        });
-        return realApp;
-    } catch (error) {
-        console.error('Failed to load real app, using test app:', error.message);
-        return testApp;
-    }
+    server.addRoute('/api', productRoutes.init());
+
+    server.addRoute('/auth', loginRoutes.init()); 
+
+    return server.getApp();
 }
-
-
-
-async function main() {
-    try {
-        console.log('Starting server initialization...');
-        
-        // Import with error handling
-        const { Server } = await import('./src/server/server.js');
-        const { ProductRoutes } = await import('./src/routes/product_routes.js');
-        const { LoginRoutes } = await import('./src/routes/login_routes.js');
-        
-        console.log('All modules imported successfully');
-        
-        const server = new Server();
-        const productRoutes = new ProductRoutes();
-        const loginRoutes = new LoginRoutes();
-
-        server.addRoute('/api', productRoutes.init());
-        server.addRoute('/auth', loginRoutes.init());
-
-        console.log('Routes configured');
-        return server.getApp();
-        
-    } catch (error) {
-        console.error('CRITICAL ERROR during setup:', error);
-        console.error('Stack:', error.stack);
-        throw error;
-    }
-}
-
 
 const appPromise = main().catch(error => {
     console.log('Server error:', error.message);
