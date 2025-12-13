@@ -25,10 +25,10 @@ const app = await main().catch(error => {
 
 export default app;
 
-/*
+
 
 if (process.env.VERCEL !== '1') {
-    app.then(app => {
+    main().then(app => {
         const PORT = process.env.PORT || 3333;
         app.listen(PORT, () => {
             console.log(`Local server running on port  ${PORT}`);
@@ -37,4 +37,3 @@ if (process.env.VERCEL !== '1') {
 }
 
 
-*/

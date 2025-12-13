@@ -15,6 +15,7 @@
   "keywords": [],
   "author": "Ladislao Rivera",
   "license": "MIT",
+  
   "dependencies": {
     "cors": "^2.8.5",
     "debug": "^4.4.3",
