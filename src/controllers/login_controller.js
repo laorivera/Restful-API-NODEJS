@@ -19,9 +19,9 @@ export class LoginController {
   }
 };
 
-  loginValid = async (req, res) => {
+  loginValid =(req, res) => {
     try{
-
-    }catch(error){}
+        return res.status(201).json({user: req.user, token: "token valid"})
+    }catch(error){console.log("error", error)}
   }
 }

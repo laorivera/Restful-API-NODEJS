@@ -7,9 +7,11 @@ export class JwtToken{
 
   authenticateToken = (req, res, next) => {
   
-    const authHeader = req.headers['authorization'];
+    const { authorization } = req.headers;
 
-    const token = authHeader && authHeader.split(' ')[1]; // Bearer TOKEN
+    const authHeader = authorization;
+
+    const token = authHeader
 
     if (!token) {
       return res.status(401).json({ error: 'Access token required' });
@@ -24,7 +26,7 @@ export class JwtToken{
               return res.status(403).json({error: "token invalido"})
             }
         }
-        console.log('test jwt')
+        console.log('token ok valido')
         req.user = user;
         next();
       });
