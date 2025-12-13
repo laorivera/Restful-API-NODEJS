@@ -62,12 +62,18 @@ PUT /api/product
 
     Body: {
 
-      "id": "string",        // Requerido - Document ID
-      
       "name": "string",
-      
-      ...all other fields
-  
+
+      "price": "number",
+
+      "description": "string",
+
+      "sku": "string",
+
+      "stock": "number",
+
+      "category": "string"
+
     }
 
 Eliminar producto
@@ -87,3 +93,39 @@ DELETE /api/product
     Node.js + Express
 
     Firebase Firestore
+
+
+🔐 Endpoints de Autenticación
+
+Login de usuario
+
+ POST /auth/login
+
+    Body:
+        json
+
+        {
+          "username": "string",
+          "password": "string"
+        }
+
+=>
+
+    Respuesta: 
+    
+        { "token": "jwt-token" }
+
+Validar token y obtener datos de usuario (Protegido)
+
+GET /auth/user
+Headers: Authorization: Bearer <token-jwt>
+
+👥 Usuarios de Prueba
+
+    username: juanperez12
+    password: admin123
+    email: examlpe@domain.com
+
+    username: luciv  
+    password: admin321
+    email: luci@domain.com
