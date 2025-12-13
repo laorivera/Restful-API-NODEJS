@@ -7,7 +7,6 @@ export class ProductController {
     productServices = new ProductServices
     productModels = new ProductModels
     
-    
     getProducts = async (req, res) => {
       const { id } = req.params
       console.log(id)

@@ -15,12 +15,8 @@ export class Firebase {
     appId: process.env.FIREBASE_APP_ID
   };
 
-  constructor(){}
-
   app = initializeApp(this.firebaseConfig);
 
   db = getFirestore(this.app);
 
-
-  
 }

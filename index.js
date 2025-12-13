@@ -13,11 +13,14 @@
 
     server.addRoute('/auth', loginRoutes.init()); 
 
-    server.start();
+    //server.start();
+
+    return server.getApp();
     
   }
 
-  main().catch(error => {
+  export default main().catch(error => {
     console.log('Server error:', error.message);
+    throw error;
   });
 

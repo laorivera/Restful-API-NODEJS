@@ -22,6 +22,10 @@ export class Server {
         this.#app.use(path, router);
     }
 
+    getApp() {
+        return this.#app;
+    }
+
     start() {
         this.#app.listen(this.#port, () => {
             console.log('Server running on port', this.#port);
