@@ -3,6 +3,8 @@ import { ProductRoutes } from '../src/routes/product_routes.js';
 import { LoginRoutes } from '../src/routes/login_routes.js'; 
 import { Server } from '../src/server/server.js';
 
+let cachedApp;
+
 function main(){
 
     const server = new Server(); 
@@ -17,10 +19,12 @@ function main(){
     return server.getApp();
 }
 
-const app = main()
-
-export default app;
-
+export default function handler(req, res) {
+  if (!cachedApp) {
+    cachedApp = main();
+  }
+  return cachedApp(req, res);
+}
 
 /*
 
