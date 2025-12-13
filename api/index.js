@@ -17,13 +17,13 @@ async function main(){
     return server.getApp();
 }
 
-const appPromise = main().catch(error => {
+const app = await main().catch(error => {
     console.log('Server error:', error.message);
     throw error;
 });
 
 
-export default appPromise;
+export default app;
 
 /*
 
