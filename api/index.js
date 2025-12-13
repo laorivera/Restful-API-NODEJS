@@ -1,6 +1,6 @@
-import { ProductRoutes } from './src/routes/product_routes.js';
-import { LoginRoutes } from './src/routes/login_routes.js';  // Add this
-import { Server } from './src/server/server.js';
+import { ProductRoutes } from '../src/routes/product_routes.js';
+import { LoginRoutes } from '../src/routes/login_routes.js'; 
+import { Server } from '../src/server/server.js';
 
 async function main(){
 
@@ -24,7 +24,7 @@ const appPromise = main().catch(error => {
 
 export default appPromise;
 
-/*
+
 
 if (process.env.VERCEL !== '1') {
     appPromise.then(app => {
@@ -33,4 +33,4 @@ if (process.env.VERCEL !== '1') {
             console.log(`Local server running on port ${PORT}`);
         });
     });
-}*/
+}
