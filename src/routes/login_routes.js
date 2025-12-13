@@ -22,3 +22,7 @@ export class LoginRoutes {
   }
   
 }
+
+export default function handler(req, res) {
+  res.json({ message: 'Test endpoint works' });
+}

@@ -1,3 +1,4 @@
+/*
 import { ProductRoutes } from '../src/routes/product_routes.js';
 import { LoginRoutes } from '../src/routes/login_routes.js'; 
 import { Server } from '../src/server/server.js';
@@ -33,3 +34,22 @@ if (process.env.VERCEL !== '1') {
         });
     });
 }
+*/
+
+// api/index.js - MINIMAL VERSION
+import express from 'express';
+
+const app = express();
+app.use(express.json());
+
+// Basic route
+app.get('/', (req, res) => {
+  res.json({ status: 'API is working' });
+});
+
+// Test route
+app.get('/api/test', (req, res) => {
+  res.json({ test: 'success' });
+});
+
+export default app;
