@@ -1,27 +1,25 @@
+
 import { ProductRoutes } from '../src/routes/product_routes.js';
 import { LoginRoutes } from '../src/routes/login_routes.js'; 
 import { Server } from '../src/server/server.js';
 
-let cachedApp = null;
+function main(){
 
-async function main() {
-  const server = new Server(); 
+    const server = new Server(); 
     
-  const productRoutes = new ProductRoutes();
-  const loginRoutes = new LoginRoutes();
+    const productRoutes = new ProductRoutes();
+    const loginRoutes = new LoginRoutes();
 
-  server.addRoute('/api', productRoutes.init());
-  server.addRoute('/auth', loginRoutes.init()); 
+    server.addRoute('/api', productRoutes.init());
 
-  return server.getApp();
+    server.addRoute('/auth', loginRoutes.init()); 
+
+    return server.getApp();
 }
 
-export default async function handler(req, res) {
-  if (!cachedApp) {
-    cachedApp = await main();
-  }
-  return cachedApp(req, res);
-}
+const app = main()
+
+export default app;
 
 
 /*
