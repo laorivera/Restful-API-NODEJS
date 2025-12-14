@@ -26,8 +26,8 @@ export class Server {
         return this.#app;
     }
 
-    start() {
-        this.#app.listen(this.#port, () => {
+    start() {  
+        this.#app.listen(this.#port, () => {  //docker
             console.log('Server running on port', this.#port);
         });
     }

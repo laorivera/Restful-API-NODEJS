@@ -3,10 +3,10 @@ import { ProductRoutes } from '../src/routes/product_routes.js';
 import { LoginRoutes } from '../src/routes/login_routes.js'; 
 import { Server } from '../src/server/server.js';
 
-let cachedApp;
 
-function main(){
+async function main(){
 
+    try {
     const server = new Server(); 
     
     const productRoutes = new ProductRoutes();
@@ -16,25 +16,10 @@ function main(){
 
     server.addRoute('/auth', loginRoutes.init()); 
 
-    return server.getApp();
+    return server.start();
+    }
+    
+    catch(error){'main failed', error}
 }
 
-export default function handler(req, res) {
-  if (!cachedApp) {
-    cachedApp = main();
-  }
-  return cachedApp(req, res);
-}
-
-/*
-
-if (process.env.VERCEL !== '1') {
-    main().then(app => {
-        const PORT = process.env.PORT || 3333;
-        app.listen(PORT, () => {
-            console.log(`Local server running on port  ${PORT}`);
-        });
-    });
-}
-
-*/
+main().catch(err => { console.error(err);});
