@@ -4,6 +4,8 @@ API REST para gestión de productos con Firebase Firestore.
 🚀 Inicio Rápido
 bash
 
+URL HOSTING: http://56.125.242.25:3333/
+
 npm install
 node index.js
 # Servidor corre en http://localhost:3333
